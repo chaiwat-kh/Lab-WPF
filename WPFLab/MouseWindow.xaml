@@ -1,0 +1,29 @@
+﻿<Window x:Class="WPFLab.MouseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MouseWindow" Height="300" Width="300">
+    <Grid MouseMove="MouseMoved">
+        <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>        
+        <TextBox Margin="3" Grid.Row="1" Grid.Column="0"  Height="Auto" >
+            Drag from this textbox
+        </TextBox>
+        <Label Grid.Row="1" Grid.Column="2" MouseDown="lblSource_MouseDown" 
+               DragEnter="lblTarget_DragEnter">
+            Or this label
+        </Label>
+        <Label Grid.Row="2" Grid.Column="1" FontFamily="Times New Roman" FontSize="18"
+               AllowDrop="True" Drop="lblTarget_Drop">To Here</Label>
+        <TextBlock Grid.Row="3" Grid.Column="0" Name="lblInfo" Grid.ColumnSpan="3">Text...</TextBlock>
+    </Grid>
+    
+</Window>

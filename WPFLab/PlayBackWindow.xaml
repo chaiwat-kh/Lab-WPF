@@ -1,0 +1,36 @@
+﻿<Window x:Class="WPFLab.PlayBackWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PlayBackWindow" Height="300" Width="300">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Button.MouseEnter">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Effect.Radius"
+To="0" Duration="0:0:0.4"></DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Button.MouseLeave">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Effect.Radius" To="10"
+Duration="0:0:0.2"></DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Window.Triggers>
+    
+    <StackPanel>
+        <Button Content="A Button">
+            <Button.Effect>
+                <BlurEffect Radius="10"></BlurEffect>
+            </Button.Effect>
+        </Button>
+    </StackPanel>
+    
+</Window>

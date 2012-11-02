@@ -1,0 +1,23 @@
+﻿<Window x:Class="WPFLab.BehaviorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:custom="clr-namespace:WPFLab;assembly=WPFLab"     
+        Title="BehaviorWindow" Height="300" Width="300">
+    <StackPanel>
+        <Canvas>
+            <Rectangle Canvas.Left="10" Canvas.Top="10" Fill="Yellow" Width="40" Height="60">
+            </Rectangle>
+            <Ellipse Canvas.Left="10" Canvas.Top="70" Fill="Blue" Width="80" Height="60">
+                <i:Interaction.Behaviors>
+                    <!--<custom:DragInCanvasBehavior></custom:DragInCanvasBehavior>-->
+                </i:Interaction.Behaviors>
+            </Ellipse>
+            <Ellipse Canvas.Left="80" Canvas.Top="70" Fill="OrangeRed" Width="40" Height="70">
+                <i:Interaction.Behaviors>
+                    <!--<custom:DragInCanvasBehavior></custom:DragInCanvasBehavior>-->
+                </i:Interaction.Behaviors>
+            </Ellipse>
+        </Canvas>
+    </StackPanel>
+</Window>

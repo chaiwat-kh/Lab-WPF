@@ -1,0 +1,22 @@
+﻿<Window x:Class="WPFLab.OpacityWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OpacityWindow" Height="300" Width="300">
+    <StackPanel>
+        <StackPanel.Background>
+            <ImageBrush ImageSource="/pics/Tattoo_wing.jpg" Opacity="0.7" />
+        </StackPanel.Background>
+        <Button Foreground="White" FontSize="16" Margin="10" 
+                BorderBrush="White" Background="#60AA4030"
+                Padding="20">A Semi-Transparent Button</Button>
+        <Button FontSize="14" FontWeight="Bold" Margin="3">
+            <Button.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Offset="0" Color="Black"></GradientStop>
+                    <GradientStop Offset="1" Color="Transparent"></GradientStop>
+                </LinearGradientBrush>
+            </Button.OpacityMask>
+            <Button.Content>A Partially Transparent Button</Button.Content>
+        </Button>
+    </StackPanel>
+</Window>

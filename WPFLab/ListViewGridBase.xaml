@@ -1,0 +1,41 @@
+﻿<Window x:Class="WPFLab.ListViewGridBase"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFLab.Extension"
+        Title="ListViewGridBase" Height="300" Width="300" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <local:ImagePathConverter x:Key="ImagePathConverter"></local:ImagePathConverter>
+    </Window.Resources>
+    
+    <Grid>
+        <ListView Margin="5" Name="lstProducts">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Model"
+                                        DisplayMemberBinding="{Binding Path=ModelNumber}" />
+                        <GridViewColumn Header="Description" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=ModelName}" TextWrapping="Wrap"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Picture" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source= "{Binding Path=ProductImage,
+                                                    Converter={StaticResource ImagePathConverter}}">
+                                    </Image>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Price" 
+                                        DisplayMemberBinding="{Binding Path=UnitCost, StringFormat={}{0:C}}" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

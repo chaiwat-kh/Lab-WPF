@@ -1,0 +1,108 @@
+﻿<Window x:Class="WPFLab.DataTemplateList3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFLab.Extension" 
+        Title="DataTemplateList3" Height="300" Width="500">
+
+    <Window.Resources>
+        <local:ImagePathConverter x:Key="ImagePathConverter"></local:ImagePathConverter>
+         
+
+    </Window.Resources>
+
+    <Grid DataContext="{Binding ElementName=lstProducts, Path=SelectedItem}" >
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition></ColumnDefinition>
+        <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <Button Name="cmdGetProduct" Margin="5" Click="cmdGetProduct_Click">Get Products</Button>            
+                <ListBox Name="lstProducts" HorizontalContentAlignment="Stretch" SnapsToDevicePixels="True">
+                <ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <Border Margin="5" BorderThickness="1" BorderBrush="SteelBlue" CornerRadius="4">
+                            <StackPanel Margin="3">
+                                <TextBlock Text="{Binding Path=ModelName}"></TextBlock>
+                                <StackPanel>
+                                    <StackPanel.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger 
+                                                    Binding="{Binding Path=IsSelected, RelativeSource={
+                                                    RelativeSource Mode=FindAncestor,
+                                                        AncestorType={x:Type ListBoxItem}}}" Value="False">
+                                                    <Setter Property="StackPanel.Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    
+                                    <TextBlock Margin="3" Text="{Binding Path=Description}" 
+                                                       TextWrapping="Wrap" MaxWidth="250" HorizontalAlignment="Left">
+                                            </TextBlock>
+                                            <Image Source="{Binding Path=ProductImagePath, 
+                                                Converter={StaticResource ImagePathConverter}}">
+                                            </Image>
+                                            <Button FontWeight="Regular" HorizontalAlignment="Right" Padding="1"
+                                                    Tag="{Binding}">View Details...</Button>                                        
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <Grid Name="gridProductDetails"  Grid.Column="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Margin="7">Model Number:</TextBlock>
+            <TextBox Margin="5" Grid.Column="1">
+                <TextBox.Text>
+                    <Binding Path="ModelNumber">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule></DataErrorValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Margin="5" Grid.Row="1">Model Name</TextBlock>
+            <TextBox Margin="5" Grid.Column="1" Grid.Row="1" 
+                     Text="{Binding Path=ModelName, Mode=TwoWay, 
+                            ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
+            <TextBlock Margin="5" Grid.Row="2">Description</TextBlock>
+            <TextBox Margin="5" Grid.Column="1" Grid.Row="2" 
+                     Text="{Binding Path=Description, Mode=TwoWay,
+                            ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
+            <TextBlock Margin="5" Grid.Row="3">UnitCost</TextBlock>
+            <TextBox Margin="5" Grid.Column="1" Grid.Row="3">
+                <TextBox.Text>
+                    <Binding Path="UnitCost" StringFormat="{}{0:C}">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule></ExceptionValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Margin="5" Grid.Row="4">Type</TextBlock>
+            <TextBox Margin="5" Grid.Row="4" Grid.Column="1"
+                Text="{Binding Path=CategoryType, Mode=TwoWay, 
+                            ValidatesOnExceptions=true, NotifyOnValidationError=true}">
+            </TextBox>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,64 @@
+﻿<Window x:Class="WPFLab.DataTemplateList5"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFLab.Extension"
+        Title="DataTemplateList5" Height="600" Width="300">
+    <Window.Resources>
+        <local:ImagePathConverter x:Key="ImagePathConverter"></local:ImagePathConverter>
+        <DataTemplate x:Key="HighlightTemplate">
+            <Grid Margin="0" Background="White" >
+                <Border Margin="5" BorderThickness="1" BorderBrush="SteelBlue" CornerRadius="4"
+                        Background="{Binding Path=Background, 
+                                        RelativeSource={ 
+                                                    RelativeSource
+                                                    Mode=FindAncestor,
+                                                    AncestorType={x:Type ComboBoxItem}}}">
+                    <Grid Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition ></RowDefinition>
+                            <RowDefinition ></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontWeight="Bold" Text="{Binding Path=ModelNumber}"></TextBlock>
+                        <TextBlock Grid.Row="1" FontStyle="Italic" Text="{Binding Path=ModelName}"></TextBlock>
+                        
+                        <Image Margin="5" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Stretch="None"
+                               HorizontalAlignment="Right" Width="30" Height="30" 
+                               Source="{Binding Path=ProductImage, 
+                                        Converter={StaticResource ImagePathConverter}}">
+                        </Image>
+                    </Grid>
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid DataContext="{Binding ElementName=lstProducts, Path=SelectedItem}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <StackPanel >
+                <ComboBox Margin="5" Name="lstProducts" 
+                          IsEditable="True" IsReadOnly="True" TextSearch.TextPath="ModelName"
+                          HorizontalContentAlignment="Stretch" 
+                          SnapsToDevicePixels="True"
+                     ItemTemplate="{StaticResource HighlightTemplate}">
+                    <ComboBox.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Control.Padding" Value="0"></Setter>
+                            <Style.Triggers>
+                                <Trigger Property="ComboBoxItem.IsSelected" Value="True">
+                                    <Setter Property="ComboBoxItem.Background" Value="DarkRed" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>                    
+                </ComboBox>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
