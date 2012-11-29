@@ -79,7 +79,7 @@
                     DefaultTemplate="{StaticResource DefaultTemplate}" 
                     HighlightTemplate="{StaticResource HighlightTemplate}"
                     PropertyToEvaluate="CategoryType"
-                    PropertyValueToHighlight="Car">
+                    PropertyValueToHighlight="1">
                     </local:SingleCriteriaHighlightTemplateSelector>
                 </ListBox.ItemTemplateSelector>
                 
